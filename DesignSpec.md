@@ -95,6 +95,6 @@ Test Strategy
 ===============
 This program will be tested using an already filled main excel file from a previous VDFL tournament found here.  Filled columns can be added or deleted to simulate different stages of the tournament.  This will be done manually and also checked for accuracy manually.  The criteria checked will be:
 
-*Schematics follow Guidelines for pairing
+-Schematics follow Guidelines for pairing
 
-*Records accurately giving the top teams/individuals, concurrent with the current method of excel conditional formatting to show the top teams
+-Records accurately giving the top teams/individuals, concurrent with the current method of excel conditional formatting to show the top teams
