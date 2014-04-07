@@ -1,6 +1,6 @@
 Debate Tabulation (Programming in Action)
 Justin Chen
-===============
+
 
 Functional Specification
 ===============
