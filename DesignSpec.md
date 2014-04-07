@@ -9,11 +9,11 @@ Introduction
 The aim of this project is to use computer programming to make debate tournament tabulation for the Vermont Debate and Forensics League (VDFL) public forum debate tournaments more efficient.  Note: This document may change.
 
 Client Side Programming Language
-===============
+---------------
 All code will be run client-side using Python 2.7.
 
 CSV Files
-===============
+---------------
 This program will read and write certain csv/excel files.
 These include:
 -VDFL_Tournament_Records.csv (referred to as the main excel sheet)
@@ -22,19 +22,19 @@ These include:
 -Round_3_Skims.csv
 
 Debate Tabulation Process
-===============
+---------------
 Before tournaments dates, schools submit the ID code for each team (of format <SchoolName LastInitial1LastInitial2> e.g., Hanover RC), as well as novice or A-team ranking, to the hosting coach.  The coach then makes 1st round schematics following the Guidelines for pairings.  During the tournament, win/loss records and speaker points for each participant/team are recorded on an excel spreadsheet (see attached).  Round 2 and 3 schematics are created based off of these records according to the Guidelines for pairings.  At the end of the tournament top teams and speakers are determined based off of the records according to Prize determination.
 
 Guidelines for pairings
-===============
+---------------
 For all rounds, no teams from the same schools can meet each other and no teams who have met before in the same tournament can meet each other.  For Round 1, novice teams should face novice teams.  Additionally, in Round 1 A-ranked teams should not face other A-ranked teams (this rule is nullified if the team is a novice team).  For Rounds 2 and 3, pairings are determined based off of the records so far.  Teams with the same win/loss ratio are paired against each other randomly.  If this method does not match all teams, teams with consecutive win/loss ratios are paired taking speaker points into account (for example, the highest speaker point 0/1 team would be paired with the lowest speaker point 1/0 team for Round 2).  If there are an odd number of teams, a random team from the lower tier (novice or losing team) is given a bye (meaning they sit out the round).
 
 Prize determination
-===============
+---------------
 There are two types of prizes: team and individual speaker awards.  Team awards are based first on win/loss ratios, then on team speaker points, and finally on team ranks.  Novice team awards are also given to the best novice team.  Individual speaker awards are based first on speaker points, then on ranks.  There are allowed to be ties if all relevant criteria are equal.
 
 Methods
-===============
+---------------
 This program is written using a number of methods in a class.  This section will describe all of the methods.
 -__init__(self): Initializes the program and creates several class variables (self.team1list, self.team2list).  Calls the getdata(self).
 
@@ -57,7 +57,7 @@ This method uses self.data to get the results of the tournament.  It finds the t
 †Also remember that not pairing teams that have previously seen each other or are from the same school takes precedent over all other criteria.
 
 Class Variables
-===============
+---------------
 
 -self.roundnum:
 integer, the round number (1, 2, or 3)
@@ -92,7 +92,7 @@ lost 1)
 list of strings, list of all the team IDs of teams who have lost all their rounds
 
 Test Strategy
-===============
+---------------
 This program will be tested using an already filled main excel file from a previous VDFL tournament found here.  Filled columns can be added or deleted to simulate different stages of the tournament.  This will be done manually and also checked for accuracy manually.  The criteria checked will be:
 
 -Schematics follow Guidelines for pairing
