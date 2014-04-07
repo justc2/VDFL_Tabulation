@@ -5,7 +5,7 @@ Design Specification
 ===============
 
 Introduction
-===============
+---------------
 The aim of this project is to use computer programming to make debate tournament tabulation for the Vermont Debate and Forensics League (VDFL) public forum debate tournaments more efficient.  Note: This document may change.
 
 Client Side Programming Language
