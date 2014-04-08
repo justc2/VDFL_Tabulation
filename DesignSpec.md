@@ -60,6 +60,7 @@ This method opens the schematic file and writes in self.team1list and self.team2
 This method uses self.data to get the results of the tournament.  It finds the top 4 teams, the top novice team, and the top 8 speakers using the data.  It then opens and writes those results into the main excel file.
 
 *If there are an odd number of teams when separating, a random team from the lower performing list (either self.loseteamlist or self.nteamlist) will be given a bye.  If there are an even number of teams total but an odd number of teams in the subset teamlists, one pairing will be inter-subset (the best team from the lower performing list will be paired with the worst team in the higher performing list).
+
 †Also remember that not pairing teams that have previously seen each other or are from the same school takes precedent over all other criteria.
 
 Class Variables
