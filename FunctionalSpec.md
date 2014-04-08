@@ -36,19 +36,19 @@ the team IDs using the school name and last initials of the individuals (e.g., H
 if the team is a novice (both competitors are in their first academic year of debating)
 if the team is an A-team - the top team from that school (cannot be a novice)
 
-From this, the director creates an excel file of this data.  An example from a 2013 VDFL tournament at Hanover High School can be found here.
+From this, the director creates an excel file of this data.  An example from a 2013 VDFL tournament at Hanover High School can be found [here](https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVYzd0bXE1UHBUYW8/edit).
 
-Then, a round 1 (of 3) schematic is created to pair up the teams for the first round.  The program will be used to do this.  Based on novice and A-team ranking, the program will match teams from different schools against each other.  Schematics also include judge assignments, however, these will not be part of the program and will have to still be entered manually.  Here is a sample schematic (w/o judges filled in).
+Then, a round 1 (of 3) schematic is created to pair up the teams for the first round.  The program will be used to do this.  Based on novice and A-team ranking, the program will match teams from different schools against each other.  Schematics also include judge assignments, however, these will not be part of the program and will have to still be entered manually.  [Here](https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVdW1xRVNwTDg5V1E/edit) is a sample schematic (w/o judges filled in).
 
 As the tournament progresses, a number of criteria filled out for each round on paper ballots by the judge are recorded in the Excel Sheet.  They include…
 Win/Loss (W/L) =  The outcome of the round.
 Speaker points (Pts) =  Individual debating skill ranked from 20-30 points.
 Speaker rank (R) = Rank of the speakers from best to worst (1-4).
-Here is a blank version of the complete judge’s ballot.
+[Here](https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVY0s5V3h6SU0wM2s/edit) is a blank version of the complete judge’s ballot.
 
 Later rounds (2 and 3) schematics will also be created by this program.  They no longer take novice or A-team rankings into account.  Instead, they are based off of the W/L ratio of the teams (teams with similar ratios are paired against each other).
 
-At the end of the tournament, awards are given to the top 3 teams and top novice team based off of W/L ratios, then speaker points, then ranks.  This will be done by the program.  Additionally, speaker awards are given to the top 3-8 individuals based off of speaker points, then ranks.  This will also be done by the program.  This concludes the VDFL tabulation process.  The previously referenced Hanover tournament excel sheet can be found filled in with all the data from the tournament here.
+At the end of the tournament, awards are given to the top 3 teams and top novice team based off of W/L ratios, then speaker points, then ranks.  This will be done by the program.  Additionally, speaker awards are given to the top 3-8 individuals based off of speaker points, then ranks.  This will also be done by the program.  This concludes the VDFL tabulation process.  The previously referenced Hanover tournament excel sheet can be found filled in with all the data from the tournament [here](https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVTy01QkFwTk9VM1E/edit).
 
 
 CSV to Excel

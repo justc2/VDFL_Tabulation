@@ -28,7 +28,7 @@ These include:
 
 Debate Tabulation Process
 ---------------
-Before tournaments dates, schools submit the ID code for each team (of format <SchoolName LastInitial1LastInitial2> e.g., Hanover RC), as well as novice or A-team ranking, to the hosting coach.  The coach then makes 1st round schematics following the Guidelines for pairings.  During the tournament, win/loss records and speaker points for each participant/team are recorded on an [excel spreadsheet] (https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVTy01QkFwTk9VM1E/edit).  Round 2 and 3 schematics are created based off of these records according to the Guidelines for pairings.  At the end of the tournament top teams and speakers are determined based off of the records according to Prize determination.
+Before tournaments dates, schools submit the ID code for each team (of format <SchoolName LastInitial1LastInitial2> e.g., Hanover RC), as well as novice or A-team ranking, to the hosting coach.  The coach then makes 1st round schematics following the Guidelines for pairings.  During the tournament, win/loss records and speaker points for each participant/team are recorded on an [excel spreadsheet](https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVTy01QkFwTk9VM1E/edit).  Round 2 and 3 schematics are created based off of these records according to the Guidelines for pairings.  At the end of the tournament top teams and speakers are determined based off of the records according to Prize determination.
 
 Guidelines for pairings
 ---------------
@@ -99,7 +99,7 @@ list of strings, list of all the team IDs of teams who have lost all their round
 
 Test Strategy
 ---------------
-This program will be tested using an already filled main excel file from a previous VDFL tournament found here.  Filled columns can be added or deleted to simulate different stages of the tournament.  This will be done manually and also checked for accuracy manually.  The criteria checked will be:
+This program will be tested using an already filled main excel file from a previous VDFL tournament found [here](https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVTy01QkFwTk9VM1E/edit).  Filled columns can be added or deleted to simulate different stages of the tournament.  This will be done manually and also checked for accuracy manually.  The criteria checked will be:
 
 -Schematics follow Guidelines for pairing
 
