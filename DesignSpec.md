@@ -18,8 +18,11 @@ CSV Files
 This program will read and write certain csv/excel files.
 These include:
 -VDFL_Tournament_Records.csv (referred to as the main excel sheet)
+
 -Round_1_Skims.csv
+
 -Round_2_Skims.csv
+
 -Round_3_Skims.csv
 
 Debate Tabulation Process
@@ -37,6 +40,7 @@ There are two types of prizes: team and individual speaker awards.  Team awards 
 Methods
 ---------------
 This program is written using a number of methods in a class.  This section will describe all of the methods.
+
 -__init__(self): Initializes the program and creates several class variables (self.team1list, self.team2list).  Calls the getdata(self).
 
 -getdata(self):
