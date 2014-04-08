@@ -28,7 +28,7 @@ These include:
 
 Debate Tabulation Process
 ---------------
-Before tournaments dates, schools submit the ID code for each team (of format <SchoolName LastInitial1LastInitial2> e.g., Hanover RC), as well as novice or A-team ranking, to the hosting coach.  The coach then makes 1st round schematics following the Guidelines for pairings.  During the tournament, win/loss records and speaker points for each participant/team are recorded on an excel spreadsheet (see attached).  Round 2 and 3 schematics are created based off of these records according to the Guidelines for pairings.  At the end of the tournament top teams and speakers are determined based off of the records according to Prize determination.
+Before tournaments dates, schools submit the ID code for each team (of format <SchoolName LastInitial1LastInitial2> e.g., Hanover RC), as well as novice or A-team ranking, to the hosting coach.  The coach then makes 1st round schematics following the Guidelines for pairings.  During the tournament, win/loss records and speaker points for each participant/team are recorded on an [excel spreadsheet] (https://docs.google.com/a/hanovernorwichschools.org/file/d/0B00xrZeZB8EVTy01QkFwTk9VM1E/edit).  Round 2 and 3 schematics are created based off of these records according to the Guidelines for pairings.  At the end of the tournament top teams and speakers are determined based off of the records according to Prize determination.
 
 Guidelines for pairings
 ---------------
