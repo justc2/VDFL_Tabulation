@@ -42,7 +42,7 @@ Methods
 ---------------
 This program is written using a number of methods in a class.  This section will describe all of the methods.
 
--__init__(self): Initializes the program and creates several class variables (self.team1list, self.team2list).  Calls the getdata(self).
+-__ init __(self): Initializes the program and creates several class variables (self.team1list, self.team2list).  Calls the getdata(self).
 
 -getdata(self):
 Opens and reads the main excel file containing tournament records, storing all the data in self.data.  Uses available data to figure out the round number (stored in self.roundnum).  Finally, either calls seperateteams(self) if the round number is 1-3 or getresults(self) if all three rounds are over.
