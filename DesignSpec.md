@@ -99,3 +99,13 @@ This program will be tested using an already filled main excel file from a previ
 -Schematics follow Guidelines for pairing
 
 -Records accurately giving the top teams/individuals, concurrent with the current method of excel conditional formatting to show the top teams
+
+Code Documentation
+----------------
+The code and documentation for this project will be kept in a GitHub repository called VDFL_Tabulation.
+
+The repository can be found here:  https://github.com/jyc8889/VDFL_Tabulation
+
+Code Deployment
+----------------
+The code will be deployed on the tabulation computer using a python file entitled Debate_Tabulation_Program.py.  It will be run using the IDLE development environment for Python.
