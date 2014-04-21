@@ -14,7 +14,6 @@ class DebateTabulation(object):
         self.roundnum = 1
         self.team1list = []
         self.team2list = []
-        
         self.getdata()
     
     
@@ -24,13 +23,28 @@ class DebateTabulation(object):
         with open(scoresheetname, 'rU') as mainfile:
             self.data = list(tuple(entry) for entry in csv.reader(mainfile, delimiter=','))
         
+        self.findroundnum()
+
+        self.rowlen = len(self.data)
+        
         if self.roundnum<=3:
             self.seperateteams()
         else:
             ""
 #            self.getresults()
         
+    def searchdata(self, rows, columns):
+        numrows = len(rows)
+        numcounters = len(columns)
         
+        
+    
+    def findroundnum(self):
+        rows = []
+        columns = [2,5,8]
+        self.searchdata(rows, columns)
+        
+    
     def seperateteams(self): #creates lists of team IDs for varsity and novice teams
         if self.roundnum == 1:
             self.teamlist = [] #list of all teams
@@ -81,6 +95,12 @@ class DebateTabulation(object):
         pastskimname = "Round "+str(self.roundnum-1)+" Skims.csv" 
         with open(pastskimname, 'rU') as pastskim:
             self.pastskim = list(tuple(entry) for entry in csv.reader(pastskim, delimiter=','))
+            rowlen = len(self.pastskim)
+            rowcounter = 2
+            while rowcounter<=rowlen:
+                team1 = self.pastskim[rowcounter[0]]
+                team2 = self.pastskim[rowcounter[0]]
+            self.pastpairdict = {}
         
 
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
@@ -106,4 +126,5 @@ class DebateTabulation(object):
             
 
 DebateTabulation()
+
 
