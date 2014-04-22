@@ -26,6 +26,9 @@ class DebateTabulation(object):
         self.findroundnum()
 
         self.rowlen = len(self.data)
+        self.columnlen = len(self.data[0])
+        print self.rowlen
+        print self.columnlen
         
         if self.roundnum<=3:
             self.seperateteams()
@@ -34,13 +37,13 @@ class DebateTabulation(object):
 #            self.getresults()
         
     def searchdata(self, rows, columns):
-        numrows = len(rows)
-        numcounters = len(columns)
+#        while 
+        ""
         
         
     
     def findroundnum(self):
-        rows = []
+        rows = [5,10,15,20]
         columns = [2,5,8]
         self.searchdata(rows, columns)
         
@@ -57,17 +60,18 @@ class DebateTabulation(object):
                 teamrow = self.data[rowcounter]
                 nrow = self.data[rowcounter+1]
                 team = teamrow[0]
-                novice = nrow[0]
+                novice = nrow[0].lower()
                 self.teamlist.append(team)
                 if novice == "":
                     self.vteamlist.append(team)
-                elif novice.lower == "n" or "(n)":
+                elif novice == "n" or novice == "(n)":
                     self.nteamlist.append(team)
                 else:
                     print "Invalid inputs for novice identification."
                 rowcounter = rowcounter+2
 
-            print self.teamlist
+            print self.vteamlist
+            print self.nteamlist
             print ""
                     
             self.pairteams(self.vteamlist)
