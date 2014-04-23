@@ -12,11 +12,8 @@ class DebateTabulation(object):
     
     def __init__(self):
         self.roundnum = 1
-        self.team1list = []
-        self.team2list = []
         self.getdata()
-    
-    
+     
     def getdata(self): #takes data off of a csv file with team names/records
         scoresheetname = "Hanover Filled Sheet.csv"
         
@@ -27,36 +24,41 @@ class DebateTabulation(object):
 
         self.rowlen = len(self.data)
         self.columnlen = len(self.data[0])
-        print self.rowlen
-        print self.columnlen
         
         if self.roundnum<=3:
             self.seperateteams()
         else:
-            ""
-#            self.getresults()
-        
+            self.getresults()
+         
     def searchdata(self, rows, columns):
-#        while 
-        ""
+        self.dataset = []
+        rowcounter = 0
+        while rowcounter<len(rows):
+            columncounter = 0
+            while columncounter<len(columns):
+                r = self.data[rowcounter]
+                data = r[columncounter]
+                self.dataset.append(data)
+                columncounter += 1
+            rowcounter += 1
+        print self.dataset
+        print ""
         
-        
-    
     def findroundnum(self):
         rows = [5,10,15,20]
         columns = [2,5,8]
         self.searchdata(rows, columns)
-        
-    
+            
     def seperateteams(self): #creates lists of team IDs for varsity and novice teams
         if self.roundnum == 1:
             self.teamlist = [] #list of all teams
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
+            self.team1list = []
+            self.team2list = []
             
-            rowlen = len(self.data)
             rowcounter = 2
-            while rowcounter<rowlen:
+            while rowcounter<self.rowlen:
                 teamrow = self.data[rowcounter]
                 nrow = self.data[rowcounter+1]
                 team = teamrow[0]
@@ -69,10 +71,6 @@ class DebateTabulation(object):
                 else:
                     print "Invalid inputs for novice identification."
                 rowcounter = rowcounter+2
-
-            print self.vteamlist
-            print self.nteamlist
-            print ""
                     
             self.pairteams(self.vteamlist)
             self.pairteams(self.nteamlist)
