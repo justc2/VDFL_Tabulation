@@ -19,12 +19,12 @@ class DebateTabulation(object):
         
         with open(scoresheetname, 'rU') as mainfile:
             self.data = list(tuple(entry) for entry in csv.reader(mainfile, delimiter=','))
-        
-        self.findroundnum()
-
+    
         self.rowlen = len(self.data)
         self.columnlen = len(self.data[0])
         
+        self.findroundnum()
+
         if self.roundnum<=3:
             self.seperateteams()
         else:
@@ -45,9 +45,7 @@ class DebateTabulation(object):
         print ""
         
     def findroundnum(self):
-        rows = [5,10,15,20]
-        columns = [2,5,8]
-        self.searchdata(rows, columns)
+        self.searchdata([5,10,15,20],[2,5,8])
             
     def seperateteams(self): #creates lists of team IDs for varsity and novice teams
         if self.roundnum == 1:
@@ -57,20 +55,34 @@ class DebateTabulation(object):
             self.team1list = []
             self.team2list = []
             
+#            rowcounter = 2
+#            while rowcounter<self.rowlen:
+#                teamrow = self.data[rowcounter]
+#                nrow = self.data[rowcounter+1]
+#                team = teamrow[0]
+#                novice = nrow[0].lower()
+#                self.teamlist.append(team)
+#                if novice == "":
+#                    self.vteamlist.append(team)
+#                elif novice == "n" or novice == "(n)":
+#                    self.nteamlist.append(team)
+#                else:
+#                    print "Invalid inputs for novice identification."
+#                rowcounter = rowcounter+2
+
+            self.searchdata(range(1,self.rowlen),[1])
+            
             rowcounter = 2
-            while rowcounter<self.rowlen:
-                teamrow = self.data[rowcounter]
-                nrow = self.data[rowcounter+1]
-                team = teamrow[0]
-                novice = nrow[0].lower()
-                self.teamlist.append(team)
+            while rowcounter<len(self.dataset)-1:
+                team = self.dataset[rowcounter]
+                novice = self.dataset[rowcounter+1].lower()
                 if novice == "":
                     self.vteamlist.append(team)
                 elif novice == "n" or novice == "(n)":
                     self.nteamlist.append(team)
                 else:
                     print "Invalid inputs for novice identification."
-                rowcounter = rowcounter+2
+                rowcounter += 2
                     
             self.pairteams(self.vteamlist)
             self.pairteams(self.nteamlist)
