@@ -48,27 +48,10 @@ class DebateTabulation(object):
         self.searchdata([5,10,15,20],[2,5,8])
             
     def seperateteams(self): #creates lists of team IDs for varsity and novice teams
+        self.teamlist = [] #list of all teams      
         if self.roundnum == 1:
-            self.teamlist = [] #list of all teams
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
-            self.team1list = []
-            self.team2list = []
-            
-#            rowcounter = 2
-#            while rowcounter<self.rowlen:
-#                teamrow = self.data[rowcounter]
-#                nrow = self.data[rowcounter+1]
-#                team = teamrow[0]
-#                novice = nrow[0].lower()
-#                self.teamlist.append(team)
-#                if novice == "":
-#                    self.vteamlist.append(team)
-#                elif novice == "n" or novice == "(n)":
-#                    self.nteamlist.append(team)
-#                else:
-#                    print "Invalid inputs for novice identification."
-#                rowcounter = rowcounter+2
 
             self.searchdata(range(1,self.rowlen),[1])
             
@@ -83,6 +66,10 @@ class DebateTabulation(object):
                 else:
                     print "Invalid inputs for novice identification."
                 rowcounter += 2
+        
+
+            self.givebye(self.vteamlist)
+            self.givebye(self.nteamlist)
                     
             self.pairteams(self.vteamlist)
             self.pairteams(self.nteamlist)
@@ -94,8 +81,6 @@ class DebateTabulation(object):
             self.createskims() #create the round 1 skims
 
             
-            if int(len(self.teamlist)/2) != len(self.teamlist)/2: #If there are an odd number of teams, give one team a bye
-                ""
         elif self.roundnum == 2:
             self.pastpairings()
         elif self.roundnum ==3:
@@ -118,17 +103,31 @@ class DebateTabulation(object):
         
 
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
-        while len(teamlist)>1:
-            team1 = choice(teamlist)
-            team2 = choice(teamlist)
-            while team1[:3] == team2[:3]:
-                team1 = choice(teamlist)
-                team2 = choice(teamlist)
-            teamlist.remove(team1)            
-            teamlist.remove(team2)
-            self.team1list.append(team1)
-            self.team2list.append(team2)
+        while True:
+            tlist = teamlist
+            self.team1list = []
+            self.team2list = []
+            print "tlist: ",tlist
+            while len(tlist)>1:
+                breakcounter = 0
+                team1 = choice(tlist)
+                team2 = choice(tlist)
+                while team1[:3] == team2[:3]:
+                    team1 = choice(tlist)
+                    team2 = choice(tlist)
+                    breakcounter += 1
+                    if breakcounter == 3:
+                        break
+                tlist.remove(team1)            
+                tlist.remove(team2)
+                self.team1list.append(team1)
+                self.team2list.append(team2)
+            if len(tlist) == 1 or len(tlist) == 0:
+                break
       
+    def givebye(self):
+        ""
+    
       
     def createskims(self):
         csvtestwrite = open("Round "+str(self.roundnum)+" Skims.csv","w")
