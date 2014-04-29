@@ -48,7 +48,10 @@ class DebateTabulation(object):
         self.searchdata([5,10,15,20],[2,5,8])
             
     def seperateteams(self): #creates lists of team IDs for varsity and novice teams
-        self.teamlist = [] #list of all teams      
+        self.teamlist = [] #list of all teams  
+        self.team1list = []
+        self.team2list = [] 
+        self.byelist = []   
         if self.roundnum == 1:
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
@@ -105,8 +108,8 @@ class DebateTabulation(object):
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
         while True:
             tlist = teamlist
-            self.team1list = []
-            self.team2list = []
+            t1list = self.team1list
+            t2list = self.team2list
             print "tlist: ",tlist
             while len(tlist)>1:
                 breakcounter = 0
@@ -120,13 +123,17 @@ class DebateTabulation(object):
                         break
                 tlist.remove(team1)            
                 tlist.remove(team2)
-                self.team1list.append(team1)
-                self.team2list.append(team2)
+                t1list.append(team1)
+                t2list.append(team2)
             if len(tlist) == 1 or len(tlist) == 0:
                 break
+        self.team1list = t1list
+        self.team2list = t2list
       
-    def givebye(self):
-        ""
+      
+    def givebye(self, teamlist):
+        if len(teamlist)/2 != float(len(teamlist))/2:
+            self.byelist.append()
     
       
     def createskims(self):
