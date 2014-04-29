@@ -23,7 +23,7 @@ class DebateTabulation(object):
         self.rowlen = len(self.data)
         self.columnlen = len(self.data[0])
         
-        self.findroundnum()
+#        self.findroundnum()
 
         if self.roundnum<=3:
             self.seperateteams()
@@ -36,17 +36,35 @@ class DebateTabulation(object):
         while rowcounter<len(rows):
             columncounter = 0
             while columncounter<len(columns):
-                r = self.data[rowcounter]
-                data = r[columncounter]
+                r = self.data[rows[rowcounter]]
+                data = r[columns[columncounter]]
                 self.dataset.append(data)
                 columncounter += 1
             rowcounter += 1
         print self.dataset
         print ""
         
+        
     def findroundnum(self):
         self.searchdata([5,10,15,20],[2,5,8])
-            
+        counter = 0
+        while counter<len(self.dataset):
+            if self.dataset[counter-1] == "" and self.dataset[counter] == "" and self.dataset[counter+1] == "":
+                if counter>7:
+                    self.roundnum = 3
+                    break
+                elif counter>3:
+                    self.roundnum = 2
+                    break
+                else:
+                    self.roundnum = 1
+            else:
+                counter += 1
+                
+        if counter == 12:
+            self.roundnum = 4
+        
+        
     def seperateteams(self): #creates lists of team IDs for varsity and novice teams
         self.teamlist = [] #list of all teams  
         self.team1list = []
@@ -56,7 +74,7 @@ class DebateTabulation(object):
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
 
-            self.searchdata(range(1,self.rowlen),[1])
+            self.searchdata(range(0,self.rowlen),[0])
             
             rowcounter = 2
             while rowcounter<len(self.dataset)-1:
@@ -103,7 +121,12 @@ class DebateTabulation(object):
                 team1 = self.pastskim[rowcounter[0]]
                 team2 = self.pastskim[rowcounter[0]]
             self.pastpairdict = {}
-        
+
+
+    def givebye(self, teamlist):
+        if len(teamlist)/2 != float(len(teamlist))/2:
+            self.byelist.append("")       
+
 
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
         while True:
@@ -129,11 +152,6 @@ class DebateTabulation(object):
                 break
         self.team1list = t1list
         self.team2list = t2list
-      
-      
-    def givebye(self, teamlist):
-        if len(teamlist)/2 != float(len(teamlist))/2:
-            self.byelist.append()
     
       
     def createskims(self):
