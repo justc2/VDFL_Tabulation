@@ -69,7 +69,7 @@ class DebateTabulation(object):
         self.teamlist = [] #list of all teams  
         self.team1list = []
         self.team2list = [] 
-        self.byelist = []   
+        self.lowerteamlist = []   
         if self.roundnum == 1:
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
@@ -130,6 +130,7 @@ class DebateTabulation(object):
                     lowerteam = choice(self.vteamlist)
                     self.vteamlist.remove(lowerteam)
                     self.nteamlist.append(lowerteam)
+                    self.lowerteamlist.append(lowerteam)
                 else:
                     self.nteamlist.append("Bye")
 #            else:
