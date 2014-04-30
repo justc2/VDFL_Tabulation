@@ -15,7 +15,7 @@ class DebateTabulation(object):
         self.getdata()
      
     def getdata(self): #takes data off of a csv file with team names/records
-        scoresheetname = "Hanover Filled Sheet.csv"
+        scoresheetname = "Hanover Filled Sheet bye test.csv"
         
         with open(scoresheetname, 'rU') as mainfile:
             self.data = list(tuple(entry) for entry in csv.reader(mainfile, delimiter=','))
@@ -125,28 +125,20 @@ class DebateTabulation(object):
 
     def givebye(self, teamlist):
         if len(teamlist)/2 != float(len(teamlist))/2:
-            print "odd number of teams"
             if self.roundnum == 1:
                 if teamlist == self.vteamlist:
-                    self.chosebyeteam(vteamlist)
-                    self.vteamlist.remove(self.byeteam)
-                    self.nteamlist.append(self.byeteam)
+                    lowerteam = choice(self.vteamlist)
+                    self.vteamlist.remove(lowerteam)
+                    self.nteamlist.append(lowerteam)
                 else:
                     self.nteamlist.append("Bye")
-            else:
-                if teamlist == self.winteamlist:
-                    ""
-                elif teamlist == self.eventeamlist:
-                    ""
-                else:
-                    self.loseteamlist.append("Bye")
-            
-            self.byelist.append(self.byeteam)
-    
-    def chosebyeteam(self, teamlist):
-        self.byeteam = choice(teamlist)
-        while self.byeteam in self.byelist:
-            self.byeteam = choice(teamlist)
+#            else:
+#                if teamlist == self.winteamlist:
+#                    ""
+#                elif teamlist == self.eventeamlist:
+#                    ""
+#                else:
+#                    self.loseteamlist.append("Bye")
 
 
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
