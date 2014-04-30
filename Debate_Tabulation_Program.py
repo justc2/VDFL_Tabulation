@@ -125,7 +125,28 @@ class DebateTabulation(object):
 
     def givebye(self, teamlist):
         if len(teamlist)/2 != float(len(teamlist))/2:
-            self.byelist.append("")       
+            print "odd number of teams"
+            if self.roundnum == 1:
+                if teamlist == self.vteamlist:
+                    self.chosebyeteam(vteamlist)
+                    self.vteamlist.remove(self.byeteam)
+                    self.nteamlist.append(self.byeteam)
+                else:
+                    self.nteamlist.append("Bye")
+            else:
+                if teamlist == self.winteamlist:
+                    ""
+                elif teamlist == self.eventeamlist:
+                    ""
+                else:
+                    self.loseteamlist.append("Bye")
+            
+            self.byelist.append(self.byeteam)
+    
+    def chosebyeteam(self, teamlist):
+        self.byeteam = choice(teamlist)
+        while self.byeteam in self.byelist:
+            self.byeteam = choice(teamlist)
 
 
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
