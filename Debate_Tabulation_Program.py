@@ -15,7 +15,7 @@ class DebateTabulation(object):
         self.getdata()
      
     def getdata(self): #takes data off of a csv file with team names/records
-        scoresheetname = "Hanover Filled Sheet bye test.csv"
+        scoresheetname = "Hanover Filled Sheet.csv"
         
         with open(scoresheetname, 'rU') as mainfile:
             self.data = list(tuple(entry) for entry in csv.reader(mainfile, delimiter=','))
@@ -30,13 +30,13 @@ class DebateTabulation(object):
         else:
             self.getresults()
          
-    def searchdata(self, rows, columns):
+    def searchdata(self, datalist, rows, columns):
         self.dataset = []
         rowcounter = 0
         while rowcounter<len(rows):
             columncounter = 0
             while columncounter<len(columns):
-                r = self.data[rows[rowcounter]]
+                r = datalist[rows[rowcounter]]
                 data = r[columns[columncounter]]
                 self.dataset.append(data)
                 columncounter += 1
@@ -46,7 +46,7 @@ class DebateTabulation(object):
         
         
     def findroundnum(self):
-        self.searchdata([5,10,15,20],[2,5,8])
+        self.searchdata(self.data,[5,10,15,20],[2,5,8])
         counter = 0
         while counter<len(self.dataset):
             if self.dataset[counter-1] == "" and self.dataset[counter] == "" and self.dataset[counter+1] == "":
@@ -74,7 +74,7 @@ class DebateTabulation(object):
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
 
-            self.searchdata(range(0,self.rowlen),[0])
+            self.searchdata(self.data, range(0,self.rowlen), [0])
             
             rowcounter = 2
             while rowcounter<len(self.dataset)-1:
@@ -112,15 +112,13 @@ class DebateTabulation(object):
         
         
     def pastpairings(self):
-        pastskimname = "Round "+str(self.roundnum-1)+" Skims.csv" 
-        with open(pastskimname, 'rU') as pastskim:
-            self.pastskim = list(tuple(entry) for entry in csv.reader(pastskim, delimiter=','))
-            rowlen = len(self.pastskim)
-            rowcounter = 2
-            while rowcounter<=rowlen:
-                team1 = self.pastskim[rowcounter[0]]
-                team2 = self.pastskim[rowcounter[0]]
-            self.pastpairdict = {}
+        self.pastskimname = "Round "+str(self.roundnum-1)+" Skims.csv"
+        
+        if self.roundnum == 2:
+            ""
+        else:
+            ""           
+#            self.pastpairdict = {}
 
 
     def givebye(self, teamlist):
