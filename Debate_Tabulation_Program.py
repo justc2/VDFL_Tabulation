@@ -11,24 +11,21 @@ from random import choice
 class DebateTabulation(object):
     
     def __init__(self):
-        self.roundnum = 1
-        self.getdata()
-     
-    def getdata(self): #takes data off of a csv file with team names/records
-        scoresheetname = "Hanover Filled Sheet.csv"
-        
-        with open(scoresheetname, 'rU') as mainfile:
-            self.data = list(tuple(entry) for entry in csv.reader(mainfile, delimiter=','))
-    
-        self.rowlen = len(self.data)
-        self.columnlen = len(self.data[0])
-        
+        self.roundnum = 2
+        self.getdata("Hanover Filled Sheet.csv")
+        self.maindata = self.data
+        self.rowlen = len(self.maindata)
+        self.columnlen = len(self.maindata[0])
 #        self.findroundnum()
 
         if self.roundnum<=3:
             self.seperateteams()
         else:
             self.getresults()
+     
+    def getdata(self, scoresheetname): #takes data off of a csv file with team names/records
+        with open(scoresheetname, 'rU') as mainfile:
+            self.data = list(tuple(entry) for entry in csv.reader(mainfile, delimiter=','))
          
     def searchdata(self, datalist, rows, columns):
         self.dataset = []
@@ -46,7 +43,7 @@ class DebateTabulation(object):
         
         
     def findroundnum(self):
-        self.searchdata(self.data,[5,10,15,20],[2,5,8])
+        self.searchdata(self.maindata,[5,10,15,20],[2,5,8])
         counter = 0
         while counter<len(self.dataset):
             if self.dataset[counter-1] == "" and self.dataset[counter] == "" and self.dataset[counter+1] == "":
@@ -74,7 +71,7 @@ class DebateTabulation(object):
             self.vteamlist = [] #list of varsity teams
             self.nteamlist = [] #list of novice teams
 
-            self.searchdata(self.data, range(0,self.rowlen), [0])
+            self.searchdata(self.maindata, range(0,self.rowlen), [0])
             
             rowcounter = 2
             while rowcounter<len(self.dataset)-1:
@@ -112,14 +109,30 @@ class DebateTabulation(object):
         
         
     def pastpairings(self):
-        self.pastskimname = "Round "+str(self.roundnum-1)+" Skims.csv"
-        
-        if self.roundnum == 2:
-            ""
-        else:
-            ""           
-#            self.pastpairdict = {}
-
+        self.pastpairdict = {}
+        self.getdata("Round 1 Skims.csv")
+        self.searchdata(self.data, range(0,len(self.data)),[0,1])
+        self.r1data = self.dataset
+        counter = 2
+        while counter<len(self.r1data):
+            team1 = self.r1data[counter]
+            team2 = self.r1data[counter+1]
+            self.pastpairdict[team1] = [team2]
+            self.pastpairdict[team2] = [team1]
+            counter += 2
+        print self.pastpairdict
+        if self.roundnum == 3:
+            self.getdata("Round 2 Skims.csv")
+            self.searchdata(self.data, range(0,len(self.data)),[0,1])
+            self.r2data = self.dataset
+            counter = 2
+            while counter<len(self.r2data):
+                team1 = self.r2data[counter]
+                team2 = self.r2data[counter+1]
+                self.pastpairdict[team1].append(team2)
+                self.pastpairdict[team2].append(team1)
+                counter += 2
+            print self.pastpairdict                           
 
     def givebye(self, teamlist):
         if len(teamlist)/2 != float(len(teamlist))/2:
