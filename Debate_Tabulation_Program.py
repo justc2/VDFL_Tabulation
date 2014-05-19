@@ -11,7 +11,7 @@ from random import choice
 class DebateTabulation(object):
     
     def __init__(self):
-        self.roundnum = 2
+        self.roundnum = 1
         self.getdata("Hanover Filled Sheet.csv")
         self.maindata = self.data
         self.rowlen = len(self.maindata)
@@ -56,8 +56,7 @@ class DebateTabulation(object):
                 else:
                     self.roundnum = 1
             else:
-                counter += 1
-                
+                counter += 1                
         if counter == 12:
             self.roundnum = 4
         
@@ -82,7 +81,7 @@ class DebateTabulation(object):
                 elif novice == "n" or novice == "(n)":
                     self.nteamlist.append(team)
                 else:
-                    print "Invalid inputs for novice identification."
+                    print "Invalid inputs for novice identification for team "+team
                 rowcounter += 2
         
 
@@ -92,20 +91,71 @@ class DebateTabulation(object):
             self.pairteams(self.vteamlist)
             self.pairteams(self.nteamlist)
             
-            print self.team1list
-            print self.team2list
-            print ""
-            
             self.createskims() #create the round 1 skims
 
             
         elif self.roundnum == 2:
+            self.winteamlist = []
+            self.loseteamlist = []
             self.pastpairings()
-        elif self.roundnum ==3:
-            self.pastpairings()
+            self.searchdata(self.maindata, range(0,self.rowlen), [0,2])
+            rowcounter = 4
+            while rowcounter<len(self.dataset)-3:
+                team = self.dataset[rowcounter]
+                winloss = self.dataset[rowcounter+1].lower()
+                if winloss == "w":
+                    self.winteamlist.append(team)
+                elif winloss == "l":
+                    self.loseteamlist.append(team)
+                else:
+                    print "Invalid Win/Loss input for team "+team
+                rowcounter+=4
+            
+            print self.winteamlist
+            print self.loseteamlist
+            
+            self.givebye(self.winteamlist)
+            self.givebye(self.loseteamlist)
+                        
+            self.pairteams(self.winteamlist)
+            self.pairteams(self.loseteamlist)
+            
+            self.createskims()
+                
         else:
-            ""
-            #self.awards()
+            self.winteamlist = []
+            self.eventeamlist = []
+            self.loseteamlist = []
+            self.pastpairings()
+            self.searchdata(self.maindata, range(0,self.rowlen), [0,2,5])
+            rowcounter = 6
+            while rowcounter<len(self.dataset)-5:
+                team = self.dataset[rowcounter]
+                winloss1 = self.dataset[rowcounter+1].lower()
+                winloss2 = self.dataset[rowcounter+2].lower()
+                if winloss1 == "w" and winloss2 == "w":
+                    self.winteamlist.append(team)
+                elif winloss1 == "w" or winloss1 == "l" and winloss2 == "w" or winloss2 == "l" and winloss1 != winloss2:
+                    self.eventeamlist.append(team)
+                elif winloss2 == "l" and winloss2 == "l":
+                    self.loseteamlist.append(team)
+                else:
+                    print "Invalid Win/Loss input for team "+team
+                rowcounter+=6
+            
+            print self.winteamlist
+            print self.eventeamlist
+            print self.loseteamlist
+            
+            self.givebye(self.winteamlist)
+            self.givebye(self.eventeamlist)
+            self.givebye(self.loseteamlist)
+                        
+            self.pairteams(self.winteamlist)
+            self.pairteams(self.eventeamlist)
+            self.pairteams(self.loseteamlist)
+            
+            self.createskims()
         
         
     def pastpairings(self):
@@ -144,39 +194,113 @@ class DebateTabulation(object):
                     self.lowerteamlist.append(lowerteam)
                 else:
                     self.nteamlist.append("Bye")
-#            else:
-#                if teamlist == self.winteamlist:
-#                    ""
-#                elif teamlist == self.eventeamlist:
-#                    ""
-#                else:
-#                    self.loseteamlist.append("Bye")
-
+            else:
+                if teamlist == self.winteamlist:
+                    lowerteam = choice(self.winteamlist)
+                    self.winteamlist.remove(lowerteam)
+                    if self.roundnum == 2:
+                        self.loseteamlist.append(lowerteam)
+                    else:
+                        self.eventeamlist.append(lowerteam)
+                    self.lowerteamlist.append(lowerteam)
+                elif teamlist == self.eventeamlist:
+                    lowerteam = choice(self.eventeamlist)
+                    self.eventeamlist.remove(lowerteam)
+                    self.loseteamlist.append(lowerteam)
+                    self.lowerteamlist.append(lowerteam)
+                else:
+                    self.loseteamlist.append("Bye")
 
     def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
         while True:
-            tlist = teamlist
-            t1list = self.team1list
-            t2list = self.team2list
-            print "tlist: ",tlist
-            while len(tlist)>1:
+            tlistclean = teamlist
+            print "tlist: ",tlistclean
+            while len(tlistclean)>1:
+                tlist = tlistclean
                 breakcounter = 0
+#                print ""
+#                print tlist
+#                print tlistclean
+#                print ""
                 team1 = choice(tlist)
+                tlist.remove(team1)
                 team2 = choice(tlist)
+                tlist.remove(team2)
                 while team1[:3] == team2[:3]:
+                    tlist = tlistclean
+                    print ""
+                    print tlist
+                    print tlistclean
+                    print ""
                     team1 = choice(tlist)
+                    tlist.remove(team1)
                     team2 = choice(tlist)
+                    tlist.remove(team2)
                     breakcounter += 1
                     if breakcounter == 3:
+                        print breakcounter
                         break
-                tlist.remove(team1)            
-                tlist.remove(team2)
-                t1list.append(team1)
-                t2list.append(team2)
-            if len(tlist) == 1 or len(tlist) == 0:
+                print team1
+                tlistclean.remove(team1)            
+                tlistclean.remove(team2)
+                self.team1list.append(team1)
+                self.team2list.append(team2)
+            if len(tlistclean) == 0:
                 break
-        self.team1list = t1list
-        self.team2list = t2list
+        print ""
+        print self.team1list
+        print self.team2list
+        print ""
+
+#    def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
+#        while True:
+#            tlist = teamlist
+#            t1list = self.team1list
+#            t2list = self.team2list
+#            print "tlist: ",tlist
+#            while len(tlist)>1:
+#                breakcounter = 0
+#                team1 = choice(tlist)
+#                team2 = choice(tlist)
+#                while team1[:3] == team2[:3]:
+#                    team1 = choice(tlist)
+#                    team2 = choice(tlist)
+#                    breakcounter += 1
+#                    if breakcounter == 3:
+#                        break
+#                tlist.remove(team1)            
+#                tlist.remove(team2)
+#                t1list.append(team1)
+#                t2list.append(team2)
+#            if len(tlist) == 1 or len(tlist) == 0:
+#                break
+#        self.team1list = t1list
+#        self.team2list = t2list
+
+#    def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
+#        while True:
+#            tlist = teamlist
+#            print "tlist: ",tlist
+#            while len(tlist)>1:
+#                breakcounter = 0
+#                team1 = choice(tlist)
+#                team2 = choice(tlist)
+#                while team1[:3] == team2[:3]:
+#                    team1 = choice(tlist)
+#                    team2 = choice(tlist)
+#                    breakcounter += 1
+#                    if breakcounter == 3:
+#                        break
+#                tlist.remove(team1)            
+#                tlist.remove(team2)
+#                self.team1list.append(team1)
+#                self.team2list.append(team2)
+#            if len(tlist) == 0:
+#                break
+#        print ""
+#        print self.team1list
+#        print self.team2list
+#        print ""
     
       
     def createskims(self):
