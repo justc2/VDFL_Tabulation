@@ -11,7 +11,7 @@ from random import choice
 class DebateTabulation(object):
     
     def __init__(self):
-        self.roundnum = 3
+        self.roundnum = 4
         self.getdata("Hanover Filled Sheet.csv")
         self.maindata = self.data
         self.rowlen = len(self.maindata)
@@ -245,72 +245,6 @@ class DebateTabulation(object):
         print self.team1list
         print self.team2list
         print ""
-    
-#    def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
-#        while True:
-#            tlistclean = teamlist
-#            print "tlist: ",tlistclean
-#            while len(tlistclean)>1:
-#                tlist = tlistclean
-#                breakcounter = 0
-##                print ""
-##                print tlist
-##                print tlistclean
-##                print ""
-#                team1 = choice(tlist)
-#                tlist.remove(team1)
-#                team2 = choice(tlist)
-#                tlist.remove(team2)
-#                while team1[:3] == team2[:3]:
-#                    tlist = tlistclean
-#                    print ""
-#                    print tlist
-#                    print tlistclean
-#                    print ""
-#                    team1 = choice(tlist)
-#                    tlist.remove(team1)
-#                    team2 = choice(tlist)
-#                    tlist.remove(team2)
-#                    breakcounter += 1
-#                    if breakcounter == 3:
-#                        print breakcounter
-#                        break
-#                print team1
-#                tlistclean.remove(team1)            
-#                tlistclean.remove(team2)
-#                self.team1list.append(team1)
-#                self.team2list.append(team2)
-#            if len(tlistclean) == 0:
-#                break
-#        print ""
-#        print self.team1list
-#        print self.team2list
-#        print ""
-
-#    def pairteams(self, teamlist): #pairs teams following the Guidelines for pairing ||| Sometimes this doesn't return a list of team pairings if same-school teams would be forced to go against each other.
-#        while True:
-#            tlist = teamlist
-#            t1list = self.team1list
-#            t2list = self.team2list
-#            print "tlist: ",tlist
-#            while len(tlist)>1:
-#                breakcounter = 0
-#                team1 = choice(tlist)
-#                team2 = choice(tlist)
-#                while team1[:3] == team2[:3]:
-#                    team1 = choice(tlist)
-#                    team2 = choice(tlist)
-#                    breakcounter += 1
-#                    if breakcounter == 3:
-#                        break
-#                tlist.remove(team1)            
-#                tlist.remove(team2)
-#                t1list.append(team1)
-#                t2list.append(team2)
-#            if len(tlist) == 1 or len(tlist) == 0:
-#                break
-#        self.team1list = t1list
-#        self.team2list = t2list
 
     def createskims(self):
         csvtestwrite = open("Round "+str(self.roundnum)+" Skims.csv","w")
@@ -319,6 +253,12 @@ class DebateTabulation(object):
         rows = zip(self.team1list, self.team2list)
         for row in rows:
             skimwriter.writerow(row)
+        
+    def getresults(self):
+        self.topteams = []
+        self.topspeakers = []
+        self.searchdata(self.maindata, range(0,self.rowlen), [0,1] + range(11,16))
+        
             
 
 DebateTabulation()
