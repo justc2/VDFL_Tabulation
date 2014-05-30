@@ -21,7 +21,7 @@ class DebateTabulation(object):
         if self.roundnum<=3:
             self.seperateteams()
         else:
-            self.getresults()
+            self.awards()
      
     def getdata(self, scoresheetname): #takes data off of a csv file with team names/records
         with open(scoresheetname, 'rU') as mainfile:
@@ -254,13 +254,51 @@ class DebateTabulation(object):
         for row in rows:
             skimwriter.writerow(row)
         
-    def getresults(self):
+    def awards(self):
+        
+        num_of_topteams = 3
+        
         self.topteams = []
         self.topspeakers = []
-        self.searchdata(self.maindata, range(0,self.rowlen), [0,1] + range(11,16))
+        self.searchdata(self.maindata, range(0,self.rowlen), [0])
+        teams = self.dataset
+        self.searchdata(self.maindata, range(0,self.rowlen), [1])
+        speakers = self.dataset
+        self.searchdata(self.maindata, range(0,self.rowlen), [11])
+        wins = self.dataset
+        self.searchdata(self.maindata, range(0,self.rowlen), [13])
+        spoints = self.dataset
+        self.searchdata(self.maindata, range(0,self.rowlen), [14])
+        ranks = self.dataset
         
-            
+        topteamindex = []
+        win_num = 3
+        while len(topteamindex) < num_of_topteams:
+            ttcounter = 2
+            while ttcounter<len(wins):
+                try:
+                    wincount = int(float(wins[ttcounter]))
+                except ValueError:
+                    print "Invalid input for wins:", wins[ttcounter]
+                    break
+                if wincount == win_num:
+                    topteamindex.append(ttcounter)
+                ttcounter += 2
+            if win_num > 0:
+                win_num -= 1
+            else:
+                print "Not enough teams to create full award data."
+                break
+        
+        print topteamindex
+                    
+        topteams = []
+        topteamdata = []
+        for x in topteamindex:
+            teampoints = spoints[x] + spoints[x+1]
+            topteamdata.append(teampoints)
+        while len(topteamdata) > 0:
+            print max(topteamdata)
+            topteamdata.remove(max(topteamdata))
 
 DebateTabulation()
-
-
